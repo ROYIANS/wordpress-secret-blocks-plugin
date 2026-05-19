@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Secret Blocks
- * Plugin URI: https://github.com/your-repo/wp-secret-blocks
+ * Plugin URI: https://github.com/ROYIANS/wordpress-secret-blocks-plugin
  * Description: 提供隐形遮罩文本和密码加密区块两个 Gutenberg 功能区块。
  * Version: 1.0.0
- * Author: Your Name
+ * Author: ROYIANS
  * License: GPL-2.0-or-later
  * Text Domain: secret-blocks
  */
