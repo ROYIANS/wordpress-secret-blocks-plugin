@@ -241,11 +241,10 @@
     animation: sb-shake 0.5s ease;
 }
 
-/* 解锁后内容 */
+/* 解密后内容——不加任何额外样式，继承主题表现 */
 .sb-unlocked-content {
-    padding: 1.5em 2em;
-    color: var( --sb-text );
+    color: inherit;
 }
 
-.sb-unlocked-content p:first-child { margin-top: 0; }
-.sb-unlocked-content p:last-child  { margin-bottom: 0; }
+.sb-unlocked-content > *:first-child { margin-top: 0; }
+.sb-unlocked-content > *:last-child  { margin-bottom: 0; }

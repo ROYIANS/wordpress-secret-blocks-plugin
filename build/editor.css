@@ -97,21 +97,30 @@
     border-bottom: 1px solid #f0e060;
     padding: 0.5em 1em;
 }
-
-.is-dark-theme .sb-editor-header {
-    background: #2a2500;
-    border-bottom-color: #4a4000;
+.sb-editor-header.is-protected {
+    background: #f0fff4;
+    border-bottom-color: #6fcf97;
 }
+.sb-editor-header.needs-update {
+    background: #fff3e0;
+    border-bottom-color: #ffb74d;
+}
+
+.is-dark-theme .sb-editor-header          { background: #2a2500; border-bottom-color: #4a4000; }
+.is-dark-theme .sb-editor-header.is-protected  { background: #0d2b1a; border-bottom-color: #2e7d52; }
+.is-dark-theme .sb-editor-header.needs-update  { background: #2b1a00; border-bottom-color: #7a4f00; }
 
 .sb-editor-badge {
     font-size: 0.8em;
     color: #7a6000;
     font-weight: 500;
 }
+.sb-editor-header.is-protected .sb-editor-badge { color: #276749; }
+.sb-editor-header.needs-update .sb-editor-badge { color: #7a4200; }
 
-.is-dark-theme .sb-editor-badge {
-    color: #d4b800;
-}
+.is-dark-theme .sb-editor-badge                        { color: #d4b800; }
+.is-dark-theme .sb-editor-header.is-protected .sb-editor-badge { color: #6fcf97; }
+.is-dark-theme .sb-editor-header.needs-update .sb-editor-badge { color: #ffb74d; }
 
 .sb-inner-blocks-wrap {
     padding: 0.5em 0;
