@@ -1,0 +1,118 @@
+/* ============================================
+   Secret Blocks — 编辑器样式
+   ============================================ */
+
+/* ---------- 隐形文本 — 编辑器预览 ---------- */
+
+/* 编辑器内隐形文本预览：用 outline 暗示遮罩，不影响正常编辑 */
+.sb-hidden-text {
+    display: inline;
+    position: relative;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font-size: inherit;
+    /* 文字颜色不动，用伪元素遮罩 */
+}
+
+.sb-hidden-text::after {
+    content: '';
+    position: absolute;
+    inset: -1px -2px;
+    border-radius: 3px;
+    background-color: #1c1c1c;
+    pointer-events: none;
+    opacity: 1;
+}
+
+.is-dark-theme .sb-hidden-text::after {
+    background-color: #e4e4e4;
+}
+
+/* ---------- 加密区块 — 编辑器预览 ---------- */
+
+.sb-encrypted-block-editor {
+    border: 2px dashed rgba( 0, 0, 0, 0.15 );
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fafafa;
+    font-family: inherit;
+}
+
+.is-dark-theme .sb-encrypted-block-editor {
+    border-color: rgba( 255, 255, 255, 0.15 );
+    background: #1e1e1e;
+}
+
+/* 已加密预览状态 */
+.sb-encrypted-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5em 2em;
+    text-align: center;
+    gap: 0.5em;
+}
+
+.sb-encrypted-preview-icon {
+    font-size: 2.5em;
+    line-height: 1;
+    margin-bottom: 0.25em;
+}
+
+.sb-encrypted-preview-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1em;
+    color: #1a1a1a;
+}
+
+.is-dark-theme .sb-encrypted-preview-title {
+    color: #f0f0f0;
+}
+
+.sb-encrypted-preview-desc {
+    margin: 0;
+    font-size: 0.85em;
+    color: #888;
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+.sb-encrypted-preview-hint {
+    margin: 0.25em 0 0;
+    font-size: 0.82em;
+    color: #aaa;
+    font-style: italic;
+}
+
+/* 未加密编辑状态 */
+.sb-unlocked-editor {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.sb-editor-header {
+    background: #fffbe6;
+    border-bottom: 1px solid #f0e060;
+    padding: 0.5em 1em;
+}
+
+.is-dark-theme .sb-editor-header {
+    background: #2a2500;
+    border-bottom-color: #4a4000;
+}
+
+.sb-editor-badge {
+    font-size: 0.8em;
+    color: #7a6000;
+    font-weight: 500;
+}
+
+.is-dark-theme .sb-editor-badge {
+    color: #d4b800;
+}
+
+.sb-inner-blocks-wrap {
+    padding: 0.5em 0;
+}

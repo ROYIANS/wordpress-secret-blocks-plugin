@@ -1,0 +1,251 @@
+/* ============================================
+   Secret Blocks — 前端样式
+   ============================================ */
+
+/* ---------- 1. 隐形遮罩文本 ---------- */
+
+/*
+ * 原理：文字颜色始终 inherit，不动。
+ * 用 ::after 伪元素做实色遮罩覆盖在文字上方。
+ * 消失时伪元素做 blur + opacity fadeout，营造"融化消散"的效果。
+ */
+
+.sb-hidden-text {
+    display: inline;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+    padding: 0 2px;
+    /* 文字颜色完全不动，始终继承父级 */
+}
+
+/* 遮罩伪元素 */
+.sb-hidden-text::after {
+    content: '';
+    position: absolute;
+    inset: -1px -2px;
+    border-radius: 3px;
+    background-color: #1c1c1c;
+    pointer-events: none;
+
+    /* 默认：完全不透明遮罩，无模糊 */
+    opacity: 1;
+    filter: blur( 0px );
+
+    /* 退出动画：遮罩消散时才做 blur + fade */
+    transition:
+        opacity 0.4s ease,
+        filter 0.4s ease;
+}
+
+@media ( prefers-color-scheme: dark ) {
+    .sb-hidden-text::after {
+        background-color: #e4e4e4;
+    }
+}
+
+/* Hover：遮罩模糊后淡出 */
+.sb-hidden-text:hover::after {
+    opacity: 0;
+    filter: blur( 6px );
+}
+
+/* 点击后固定显示：遮罩完全消失 */
+.sb-hidden-text.sb-revealed::after {
+    opacity: 0;
+    filter: blur( 6px );
+    pointer-events: none;
+}
+
+/* ---------- 2. 加密区块 — 前端 ---------- */
+
+.sb-encrypted-block {
+    --sb-border: rgba( 0, 0, 0, 0.1 );
+    --sb-bg: #f9f9f9;
+    --sb-text: #1a1a1a;
+    --sb-subtext: #666;
+    --sb-input-bg: #fff;
+    --sb-input-border: #ddd;
+    --sb-btn-bg: #1a1a1a;
+    --sb-btn-text: #fff;
+    --sb-btn-hover: #333;
+    --sb-error: #c0392b;
+    --sb-hint: #888;
+
+    border: 1px solid var( --sb-border );
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: inherit;
+    background: var( --sb-bg );
+    margin: 1.5em 0;
+}
+
+@media ( prefers-color-scheme: dark ) {
+    .sb-encrypted-block {
+        --sb-border: rgba( 255, 255, 255, 0.1 );
+        --sb-bg: #1e1e1e;
+        --sb-text: #f0f0f0;
+        --sb-subtext: #aaa;
+        --sb-input-bg: #2a2a2a;
+        --sb-input-border: #444;
+        --sb-btn-bg: #f0f0f0;
+        --sb-btn-text: #1a1a1a;
+        --sb-btn-hover: #ddd;
+        --sb-error: #e74c3c;
+        --sb-hint: #888;
+    }
+}
+
+.sb-no-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    color: var( --sb-subtext );
+    gap: 0.5em;
+    text-align: center;
+}
+
+/* 锁定界面 */
+.sb-lock-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5em 2em;
+    text-align: center;
+    gap: 0.75em;
+}
+
+.sb-lock-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var( --sb-input-bg );
+    border: 1px solid var( --sb-input-border );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5em;
+    box-shadow: 0 2px 12px rgba( 0, 0, 0, 0.08 );
+}
+
+.sb-lock-svg {
+    width: 28px;
+    height: 28px;
+    color: var( --sb-text );
+}
+
+.sb-lock-title {
+    margin: 0;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var( --sb-text );
+    letter-spacing: -0.01em;
+}
+
+.sb-lock-hint {
+    margin: 0;
+    font-size: 0.85em;
+    color: var( --sb-hint );
+    font-style: italic;
+}
+
+/* 输入框行 */
+.sb-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid var( --sb-input-border );
+    border-radius: 8px;
+    overflow: hidden;
+    background: var( --sb-input-bg );
+    box-shadow: 0 1px 4px rgba( 0, 0, 0, 0.06 );
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sb-input-wrap:focus-within {
+    border-color: var( --sb-btn-bg );
+    box-shadow: 0 0 0 3px rgba( 26, 26, 26, 0.08 );
+}
+
+@media ( prefers-color-scheme: dark ) {
+    .sb-input-wrap:focus-within {
+        box-shadow: 0 0 0 3px rgba( 240, 240, 240, 0.1 );
+    }
+}
+
+.sb-password-input {
+    flex: 1;
+    padding: 0.65em 0.9em;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.9em;
+    color: var( --sb-text );
+    font-family: inherit;
+}
+
+.sb-password-input::placeholder {
+    color: var( --sb-hint );
+}
+
+.sb-unlock-btn {
+    padding: 0 0.9em;
+    border: none;
+    border-left: 1px solid var( --sb-input-border );
+    background: var( --sb-btn-bg );
+    color: var( --sb-btn-text );
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    transition: background 0.2s;
+}
+
+.sb-unlock-btn:hover {
+    background: var( --sb-btn-hover );
+}
+
+.sb-unlock-btn svg {
+    width: 16px;
+    height: 16px;
+    transform: rotate( 90deg );
+}
+
+.sb-unlock-btn.sb-loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.sb-error-msg {
+    color: var( --sb-error );
+    font-size: 0.82em;
+    margin: 0;
+}
+
+/* 摇动动画 */
+@keyframes sb-shake {
+    0%, 100% { transform: translateX( 0 ); }
+    20%       { transform: translateX( -6px ); }
+    40%       { transform: translateX( 6px ); }
+    60%       { transform: translateX( -4px ); }
+    80%       { transform: translateX( 4px ); }
+}
+
+.sb-shake {
+    animation: sb-shake 0.5s ease;
+}
+
+/* 解锁后内容 */
+.sb-unlocked-content {
+    padding: 1.5em 2em;
+    color: var( --sb-text );
+}
+
+.sb-unlocked-content p:first-child { margin-top: 0; }
+.sb-unlocked-content p:last-child  { margin-bottom: 0; }
